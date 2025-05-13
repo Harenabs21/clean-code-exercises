@@ -4,7 +4,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        List<String> predefinedItems = Arrays.asList("Vélo", "Trottinette électrique", "Kayak");
+        Item velo = new Item("Vélo");
+        Item trotinetteElectrique = new Item("Trottinette électrique");
+        Item kayak = new Item("Kayak");
+        List<Item> predefinedItems = Arrays.asList(velo, trotinetteElectrique,kayak);
         LocationSystem system = new LocationSystem(predefinedItems);
 
         Scanner scanner = new Scanner(System.in);

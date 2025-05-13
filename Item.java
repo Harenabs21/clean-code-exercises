@@ -1,9 +1,9 @@
 public class Item {
     private String name;
-    private String status;
+    private StatusEnum status;
     private String rentedUntil;
 
-    public Item(String name, String status, String rentedUntil) {
+    public Item(String name, StatusEnum status, String rentedUntil) {
         this.name = name;
         this.status = status;
         this.rentedUntil = rentedUntil;
@@ -11,13 +11,14 @@ public class Item {
 
     public Item(String name) {
         this.name = name;
+        this.status = StatusEnum.DISPONIBLE;
     }
 
     public String getName() {
         return name;
     }
 
-    public String getStatus() {
+    public StatusEnum getStatus() {
         return status;
     }
 
@@ -26,18 +27,18 @@ public class Item {
     }
 
     public void rent(String returnDate) {
-        this.status = "loué";
+        this.status = StatusEnum.LOUÉ;
         this.rentedUntil = returnDate;
     }
 
     public void returnItem() {
-        this.status = "disponible";
+        this.status = StatusEnum.DISPONIBLE;
         this.rentedUntil = null;
     }
 
     @Override
     public String toString() {
-        if ("loué".equals(status)) {
+        if (this.status.equals(StatusEnum.LOUÉ)) {
             return name + " (loué jusqu'au " + rentedUntil + ")";
         }
         return name + " (disponible)";

@@ -7,30 +7,30 @@ public class LocationSystem{
 
     private List<Item> items;
 
-    public LocationSystem(List<String> itemNames) {
+    public LocationSystem(List<Item> itemNames) {
         this.items = new ArrayList<>();
-        for (String name : itemNames) {
-            items.add(new Item(name));
+        for (Item name : itemNames) {
+            items.add(name);
         }
     }
 
     public void showAvailableItems() {
         System.out.println("Articles disponibles :");
         items.stream()
-            .filter(item -> "disponible".equals(item.getStatus()))
+            .filter(item -> item.getStatus().equals(StatusEnum.DISPONIBLE))
             .forEach(item -> System.out.println("- " + item.getName()));
     }
 
     public void showRentedItems() {
         System.out.println("Articles loués :");
         items.stream()
-            .filter(item -> "loué".equals(item.getStatus()))
-            .forEach(item -> System.out.println("- " + item));
+            .filter(item -> item.getStatus().equals(StatusEnum.LOUÉ))
+            .forEach(item -> System.out.println("- " + item.getName()));
     }
 
     public void rentItem(String itemName, int durationInDays) {
         Item item = items.stream()
-            .filter(i -> i.getName().equalsIgnoreCase(itemName) && "disponible".equals(i.getStatus()))
+            .filter(i -> i.getName().equalsIgnoreCase(itemName) && i.getStatus().equals(StatusEnum.DISPONIBLE))
             .findFirst()
             .orElse(null);
 
@@ -46,7 +46,7 @@ public class LocationSystem{
 
     public void returnItem(String itemName) {
         Item item = items.stream()
-            .filter(i -> i.getName().equalsIgnoreCase(itemName) && "loué".equals(i.getStatus()))
+            .filter(i -> i.getName().equalsIgnoreCase(itemName) && i.getStatus().equals(StatusEnum.LOUÉ))
             .findFirst()
             .orElse(null);
 
